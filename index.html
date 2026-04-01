@@ -45,6 +45,16 @@ body{
   background:url('https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/LP/BAU/BAU_DesktopHero_1500x600._CB570606369_.jpg') center/cover;
 }
 
+.blink {
+  animation: blinkAnim 1s infinite;
+}
+
+@keyframes blinkAnim {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
 /* PRODUCTS */
 .grid{
   display:grid;
@@ -241,7 +251,7 @@ function showFinal(){
 
       <p style="opacity:0.7;">That’s literally YOU right now 💀</p>
 
-      <button onclick="revenge()" style="
+      <button onclick="revenge()" class="blink" style="
         margin-top:20px;
         padding:12px 20px;
         border:none;
@@ -251,7 +261,7 @@ function showFinal(){
         font-size:16px;
         cursor:pointer;
       ">
-        😈 Take Revenge
+        😈 Click here to take revenge
       </button>
 
       <p style="
