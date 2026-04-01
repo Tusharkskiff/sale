@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon.in</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#eaeded;
+}
+
+/* HEADER */
+.header{
+  background:#131921;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:10px;
+}
+.logo{font-size:20px;font-weight:bold;margin-right:10px;}
+.search{flex:1;}
+.search input{
+  width:100%;
+  padding:8px;
+  border:none;
+  border-radius:4px;
+}
+
+/* NAV */
+.nav{
+  background:#232f3e;
+  color:white;
+  padding:8px;
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  font-size:14px;
+}
+
+/* HERO */
+.hero{
+  height:180px;
+  background:url('https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/LP/BAU/BAU_DesktopHero_1500x600._CB570606369_.jpg') center/cover;
+}
+
+/* PRODUCTS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px;
+  padding:10px;
+}
+.card{
+  background:white;
+  padding:10px;
+  cursor:pointer;
+}
+.card img{
+  width:100%;
+  height:130px;
+  object-fit:contain;
+}
+.price{color:#b12704;font-weight:bold;}
+.rating{color:#ffa41c;font-size:12px;}
+
+/* VIRUS */
+#virus{
+  display:none;
+  background:black;
+  color:#00ff9c;
+  height:100vh;
+  padding:20px;
+  font-family:monospace;
+  overflow:hidden;
+  position:relative;
+}
+
+.symbol{
+  position:absolute;
+  color:red;
+  animation:float 5s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+.flash{
+  animation:flash 0.2s infinite;
+}
+@keyframes flash{
+  0%{background:black;}
+  50%{background:#220000;}
+  100%{background:black;}
+}
+</style>
+</head>
+
+<body onclick="startVirus()">
+
+<!-- AMAZON -->
+<div id="amazon">
+
+<div class="header">
+  <div class="logo">🛒 Amazon.in</div>
+  <div class="search"><input placeholder="Search Amazon.in"></div>
+</div>
+
+<div class="nav">
+  <span>Today's Deals</span>
+  <span>Mobiles</span>
+  <span>Electronics</span>
+  <span>Fashion</span>
+  <span>Home</span>
+</div>
+
+<div class="hero"></div>
+
+<div class="grid">
+<div class="card"><img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._SX679_.jpg"><p>Apple iPhone 15</p><div class="rating">⭐⭐⭐⭐☆</div><p class="price">₹69,999</p></div>
+<div class="card"><img src="https://m.media-amazon.com/images/I/71TPda7cwUL._SX679_.jpg"><p>ASUS Gaming Laptop</p><div class="rating">⭐⭐⭐⭐⭐</div><p class="price">₹89,990</p></div>
+<div class="card"><img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._SX679_.jpg"><p>Wireless Headphones</p><div class="rating">⭐⭐⭐⭐☆</div><p class="price">₹1,499</p></div>
+<div class="card"><img src="https://m.media-amazon.com/images/I/61ZjlBOp+rL._SX679_.jpg"><p>Smart Watch</p><div class="rating">⭐⭐⭐⭐☆</div><p class="price">₹2,999</p></div>
+</div>
+
+</div>
+
+<!-- VIRUS -->
+<div id="virus">
+<pre id="terminal"></pre>
+
+<div id="progressBox" style="display:none;">
+<p>> Extracting personal data...</p>
+<progress id="bar" value="0" max="100"></progress>
+<p id="percent">0%</p>
+</div>
+</div>
+
+<script>
+let started=false;
+
+function startVirus(){
+  if(started) return;
+  started=true;
+
+  document.getElementById("amazon").style.display="none";
+  document.getElementById("virus").style.display="block";
+  typeEffect();
+}
+
+/* SYMBOLS */
+function spawnSymbols(){
+  setInterval(()=>{
+    let el=document.createElement("div");
+    el.className="symbol";
+    el.innerText=Math.random()>0.5?"💀":"👁️";
+    el.style.left=Math.random()*100+"vw";
+    el.style.fontSize=(20+Math.random()*20)+"px";
+    document.getElementById("virus").appendChild(el);
+    setTimeout(()=>el.remove(),5000);
+  },400);
+}
+
+/* TYPING */
+const lines=[
+"> Connecting to Amazon servers...",
+"> Verifying user credentials...",
+"> Access granted...",
+"> Injecting exploit...",
+"> Accessing private files...",
+"> Uploading data...",
+"> WARNING: SYSTEM BREACH DETECTED"
+];
+
+let i=0;
+
+function typeEffect(){
+  if(i<lines.length){
+    document.getElementById("terminal").innerHTML += lines[i] + "\n";
+    i++;
+    setTimeout(typeEffect,600);
+  }else{
+    startProgress();
+  }
+}
+
+/* PROGRESS */
+function startProgress(){
+  document.getElementById("progressBox").style.display="block";
+  document.getElementById("virus").classList.add("flash");
+  spawnSymbols();
+
+  let p=0;
+  let int=setInterval(()=>{
+    if(p<100){
+      p+=2;
+      if(p>100) p=100;
+      bar.value=p;
+      percent.innerText=p+"%";
+    }
+
+    if(p===100){
+      clearInterval(int);
+      setTimeout(showFinal,800);
+    }
+
+  },120);
+}
+
+/* FINAL PAGE */
+function showFinal(){
+  document.body.innerHTML=`
+  <div style="
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0d0d0d;
+    font-family:sans-serif;
+    color:white;
+  ">
+
+    <div style="
+      background:#121212;
+      padding:30px;
+      border-radius:15px;
+      text-align:center;
+      width:90%;
+      max-width:400px;
+      box-shadow:0 0 30px rgba(255,255,255,0.1);
+    ">
+
+      <h1 style="margin:0;">😄 April Fools!</h1>
+
+      <p style="margin-top:10px;">See that look on your face? 😂</p>
+
+      <img src="https://media.tenor.com/_zWYqfZdneIAAAAe/shocked-face-shocked-meme.png"
+           style="width:250px; border-radius:10px; margin:15px 0;">
+
+      <p style="opacity:0.7;">That’s literally YOU right now 💀</p>
+
+      <button onclick="revenge()" style="
+        margin-top:20px;
+        padding:12px 20px;
+        border:none;
+        border-radius:8px;
+        background:linear-gradient(90deg,#00c6ff,#0072ff);
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+      ">
+        😈 Take Revenge
+      </button>
+
+      <p style="
+        margin-top:25px;
+        font-size:13px;
+        color:#888;
+      ">
+        © 2026 Destroyer — All Rights Reserved
+      </p>
+
+    </div>
+
+  </div>
+  `;
+}
+
+/* FIXED REDIRECT */
+function revenge(){
+  window.open("https://www.google.com/search?q=how+to+not+be+fooled+by+anyone","_blank");
+}
+</script>
+
+</body>
+</html>
